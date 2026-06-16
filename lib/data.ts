@@ -10,10 +10,20 @@ export interface Author {
   imageUrl: string;
 }
 
+export interface Publisher {
+  id: number;
+  name: string;
+  country: string;
+  foundedYear: number;
+  description: string;
+  website: string;
+}
+
 export interface Book {
   id: number;
   title: string;
   authorId: number;
+  publisherId: number;
   publishedYear: number;
   genre: string;
   description: string;
@@ -21,6 +31,54 @@ export interface Book {
   pages: number;
   isbn: string;
 }
+
+export const publishers: Publisher[] = [
+  {
+    id: 1,
+    name: "Penguin Books",
+    country: "United Kingdom",
+    foundedYear: 1935,
+    description:
+      "Penguin Books is a British publishing house. It was co-founded in 1935 by Allen Lane with his brothers Richard and John, as a line of the publishers The Bodley Head, only becoming a separate company the following year. Penguin revolutionised publishing in the 1930s through its high-quality paperback books sold at sixpence.",
+    website: "https://www.penguin.co.uk",
+  },
+  {
+    id: 2,
+    name: "Secker & Warburg",
+    country: "United Kingdom",
+    foundedYear: 1935,
+    description:
+      "Secker & Warburg is a British publishing company, now an imprint of Penguin Random House UK. It was founded in London in 1935 and is best known for publishing works by George Orwell, including Animal Farm and Nineteen Eighty-Four.",
+    website: "https://www.penguinrandomhouse.co.uk",
+  },
+  {
+    id: 3,
+    name: "HarperCollins",
+    country: "United States",
+    foundedYear: 1989,
+    description:
+      "HarperCollins Publishers LLC is one of the world's largest publishing companies and is one of the Big Five English-language publishers. It is a subsidiary of News Corp, headquartered in New York City. It has publishing groups and imprints in 17 countries.",
+    website: "https://www.harpercollins.com",
+  },
+  {
+    id: 4,
+    name: "Scribner",
+    country: "United States",
+    foundedYear: 1846,
+    description:
+      "Scribner is an American publisher based in New York City. It is an imprint of Simon & Schuster. It has long been associated with literary fiction and is known for publishing works by Ernest Hemingway, F. Scott Fitzgerald, and Stephen King, among others.",
+    website: "https://www.simonandschuster.com/imprints/scribner",
+  },
+  {
+    id: 5,
+    name: "Hogarth Press",
+    country: "United Kingdom",
+    foundedYear: 1917,
+    description:
+      "Hogarth Press was a British publishing house founded in 1917 by Virginia Woolf and her husband Leonard Woolf. It published the works of many modernist writers and is best known for its association with the Bloomsbury Group. Today it is an imprint of Penguin Random House.",
+    website: "https://www.penguinrandomhouse.com/imprints/hogarth-press",
+  },
+];
 
 export const authors: Author[] = [
   {
@@ -75,6 +133,7 @@ export const books: Book[] = [
     id: 1,
     title: "Pride and Prejudice",
     authorId: 1,
+    publisherId: 1,
     publishedYear: 1813,
     genre: "Romance",
     description:
@@ -88,6 +147,7 @@ export const books: Book[] = [
     id: 2,
     title: "Emma",
     authorId: 1,
+    publisherId: 1,
     publishedYear: 1815,
     genre: "Romance",
     description:
@@ -101,6 +161,7 @@ export const books: Book[] = [
     id: 3,
     title: "1984",
     authorId: 2,
+    publisherId: 2,
     publishedYear: 1949,
     genre: "Dystopian Fiction",
     description:
@@ -114,6 +175,7 @@ export const books: Book[] = [
     id: 4,
     title: "Animal Farm",
     authorId: 2,
+    publisherId: 2,
     publishedYear: 1945,
     genre: "Political Satire",
     description:
@@ -127,6 +189,7 @@ export const books: Book[] = [
     id: 5,
     title: "Murder on the Orient Express",
     authorId: 3,
+    publisherId: 3,
     publishedYear: 1934,
     genre: "Mystery",
     description:
@@ -140,6 +203,7 @@ export const books: Book[] = [
     id: 6,
     title: "And Then There Were None",
     authorId: 3,
+    publisherId: 3,
     publishedYear: 1939,
     genre: "Mystery",
     description:
@@ -153,6 +217,7 @@ export const books: Book[] = [
     id: 7,
     title: "The Old Man and the Sea",
     authorId: 4,
+    publisherId: 4,
     publishedYear: 1952,
     genre: "Literary Fiction",
     description:
@@ -166,6 +231,7 @@ export const books: Book[] = [
     id: 8,
     title: "A Farewell to Arms",
     authorId: 4,
+    publisherId: 4,
     publishedYear: 1929,
     genre: "War Novel",
     description:
@@ -179,6 +245,7 @@ export const books: Book[] = [
     id: 9,
     title: "Mrs Dalloway",
     authorId: 5,
+    publisherId: 5,
     publishedYear: 1925,
     genre: "Modernist Literature",
     description:
@@ -192,6 +259,7 @@ export const books: Book[] = [
     id: 10,
     title: "To the Lighthouse",
     authorId: 5,
+    publisherId: 5,
     publishedYear: 1927,
     genre: "Modernist Literature",
     description:
@@ -222,4 +290,16 @@ export function getAllAuthors(): Author[] {
 
 export function getAllBooks(): Book[] {
   return books;
+}
+
+export function getPublisherById(id: number): Publisher | undefined {
+  return publishers.find((publisher) => publisher.id === id);
+}
+
+export function getAllPublishers(): Publisher[] {
+  return publishers;
+}
+
+export function getBooksByPublisherId(publisherId: number): Book[] {
+  return books.filter((book) => book.publisherId === publisherId);
 }
